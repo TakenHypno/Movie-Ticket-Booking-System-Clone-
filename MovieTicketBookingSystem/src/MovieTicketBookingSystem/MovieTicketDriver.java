@@ -1,6 +1,7 @@
 package MovieTicketBookingSystem;
+import java.util.Scanner;
 
-import java.util.*;
+import swingGUI.GUIOperations;
 
 public class MovieTicketDriver {
     static Scanner sc = new Scanner(System.in);
@@ -8,23 +9,7 @@ public class MovieTicketDriver {
     static DatabaseOperation db = new DatabaseOperation();
     
     //methods to sign up and login for user class
-    static void user_signup(){
-        System.out.println("Enter your username: ");
-        String username = sc.next();
-        
-        System.out.println("Enter your password: ");
-        String password = sc.next();
-        
-        System.out.println("Enter your name: ");
-        String name = sc.next();
-        
-        System.out.println("Enter your phone number: ");
-        String phone = sc.next();
-        
-        System.out.println("Enter your address: ");
-        String address = sc.nextLine();
-        address = sc.nextLine();
-
+    public static void user_signup(String username, String password, String name, String phone, String address){
         String sql = "INSERT INTO users(Username,Password,Name,Phone,Address) values(?,?,?,?,?)";
         Object[] values = {username,password,name,phone,address};
         int rowsAffected = db.executeUpdate(sql, values); 
@@ -56,13 +41,7 @@ public class MovieTicketDriver {
     }
 
     //methods to sign up and login for admin class
-    static void admin_signup(){
-        System.out.println("Enter your username: ");
-        String username = sc.next();
-        
-        System.out.println("Enter your password: ");
-        String password = sc.next();
-
+    public static void admin_signup(String username, String password){
         String sql = "INSERT INTO admin(Username,Password) values(?,?)";
         Object[] values = {username,password};
         int rowsAffected = db.executeUpdate(sql, values); 
@@ -72,22 +51,17 @@ public class MovieTicketDriver {
             System.out.println("Something went wrong.Sign up failed.");
     }
 
-    static void admin_login(){
-        System.out.println("Enter your username: ");
-        String username = sc.next();
-        
-        System.out.println("Enter your password: ");
-        String password = sc.next();
-
+    public static boolean admin_login(String username, String password){
         String sql = "SELECT Password from admin where username = ?";
         String pass_real = db.validatePass(sql, username);
 
         if (password.equals(pass_real)){
             System.out.println("Login Succesfull!");
             Admin a = new Admin();
-            a.adminMenu();
+            return true;
         }else{
             System.out.println("Invalid password! Try again!");
+            return false;
         }
     }
 
@@ -97,43 +71,7 @@ public class MovieTicketDriver {
     public static void main(String[] args) {
     	DatabaseOperation db = new DatabaseOperation();
     	db.initializeDatabase();
-    	
-        Scanner sc2 = new Scanner(System.in);
-        while (true) {
-	        int choice;
-	        System.out.println("----- Movie Ticket Booking System -----");
-	        System.out.println("Press 1 to sign up as user.");
-	        System.out.println("Press 2 to login as user.");
-	        System.out.println("Press 3 to sign up as admin.");
-	        System.out.println("Press 4 to login as admin.");
-	        System.out.println("Press 5 to quit program.");
-	        System.out.println("----- --------------------------- -----");
-	        System.out.print("Enter your choice:");
-	        choice = sc2.nextInt();
-	        switch(choice){
-	            case 1:
-	                //user signup
-	                user_signup();
-	                break;
-	            case 2: 
-	                //user login
-	                user_login();
-	                break;
-	            case 3:
-	                //admin signup
-	                admin_signup();
-	                break;
-	            case 4:
-	                //admin login
-	                admin_login();
-	                break;
-	            case 5:
-	            	//quit program
-	            	sc2.close();
-	            	return;
-	            	
-	        } 
-        }
- 
+    	GUIOperations.initializeFrame();
     }
+ 
 }

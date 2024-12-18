@@ -76,7 +76,7 @@ public class DatabaseOperation {
  					"Phone VARCHAR(15)", 
  					"Address VARCHAR(255)", 
  					"PRIMARY KEY (UserID)");
- 	 			CreateTable("Admins", "AdminID INT AUTO_INCREMENT", 
+ 	 			CreateTable("Admin", "AdminID INT AUTO_INCREMENT", 
  	 					"Username VARCHAR(255)", 
  	 					"Password VARCHAR(255)", 
  	 					"PRIMARY KEY (AdminID)");

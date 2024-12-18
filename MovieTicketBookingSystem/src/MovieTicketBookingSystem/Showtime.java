@@ -17,16 +17,10 @@ public class Showtime {
     
     }
 
-    public void showShowtimes(){
+    public List<Map<String,Object>> showShowtimes(){
         String sql = "SELECT * from Showtimes";
         List<Map<String,Object>> showtimes = db.getRecords(sql);
-        for (Map<String, Object> showtime : showtimes) {
-            System.out.println("Showtime ID: " + showtime.get("ShowtimeID"));
-            System.out.println("Movie ID: " + showtime.get("MovieID"));
-            System.out.println("Theater ID: " + showtime.get("TheaterID"));
-            System.out.println("Showtime: " + showtime.get("Showtime"));
-            System.out.println("-----------------------------"); 
-        }
+        return showtimes;
     }
 
     public void showShowtimesDetails(int showtimeID){

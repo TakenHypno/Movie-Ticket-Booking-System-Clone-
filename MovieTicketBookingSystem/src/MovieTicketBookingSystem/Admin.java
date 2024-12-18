@@ -18,11 +18,24 @@ public class Admin extends User{
     Movie m = new Movie();
     Theater t = new Theater();
     Showtime st = new Showtime();
-
+    
+    public Movie getMovie() {
+    	return m;
+    }
+    public Showtime getShowtime() {
+    	return st;
+    }
+    public Theater getTheater() {
+    	return t;
+    }
+    public Booking getBooking() {
+    	return b;
+    }
     public int takeUserID(){
         System.out.println("Enter user id: ");
         return sc.nextInt();
     }
+    
 
     public void adminMenu(){
         while(true){
@@ -123,5 +136,10 @@ public class Admin extends User{
                     break;
             }
         }
+    }
+    public void setShowtime(int movieid, int theaterid, int showmtime_hour, int showtime_min) {
+    	LocalDateTime localDateTime = LocalDateTime.now().withHour(showmtime_hour).withMinute(showtime_min).withSecond(0);
+        showtime = Timestamp.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        st.insertShowtime(movieid, theaterid, showtime);
     }
 }

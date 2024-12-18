@@ -20,16 +20,10 @@ public class Theater {
             System.out.println("Something went wrong.Theater not inserted.");
     }
 
-    public void showTheaters(){
+    public List<Map<String,Object>> showTheaters(){
         String sql = "SELECT * from theaters";
         List<Map<String,Object>> theaters = db.getRecords(sql);
-        for (Map<String, Object> theater : theaters) {
-            System.out.println("Theater ID: " + theater.get("TheaterID"));
-            System.out.println("Location: " + theater.get("Location"));
-            System.out.println("Seating Capacity: " + theater.get("SeatingCapacity"));
-            System.out.println("-----------------------------");
-            
-        }
+        return theaters;
 
     }
 }
