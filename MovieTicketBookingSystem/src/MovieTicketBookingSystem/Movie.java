@@ -22,18 +22,10 @@ public class Movie {
     }
 
     //Method to view all movies in database
-    public void showMovies() {
+    public List<Map<String, Object>> showMovies() {
         String sql = "SELECT * FROM Movies";
         List<Map<String, Object>> movies = db.getRecords(sql);
-        for (Map<String, Object> movie : movies) {
-            System.out.println("Movie ID: " + movie.get("MovieID"));
-            System.out.println("Title: " + movie.get("Title"));
-            System.out.println("Genre: " + movie.get("Genre"));
-            System.out.println("Rating: " + movie.get("Rating"));
-            System.out.println("Duration(mins): " + movie.get("Duration"));
-            System.out.println("Synopsis: " + movie.get("Synopsis"));
-            System.out.println("-----------------------------");
-        }
+		return movies;
     }
     
     public void deleteMovie() {
